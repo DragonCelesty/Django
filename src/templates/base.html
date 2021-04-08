@@ -1,0 +1,33 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.82.0">
+  <title>{%block title_head%}{%endblock%} | pd 110</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/navbar-static/">
+
+  {% include "head_css.html" %}
+</head>
+
+<body>
+
+  {% include "navbar.html" %}
+
+
+
+  {% block main_container%}
+  {% endblock %}
+  <div class="container-fluid">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+</body>
+
+</html>

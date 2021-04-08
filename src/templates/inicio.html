@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{%block title_head%}Bienvenidos{%endblock%}
+<style>
+
+</style>
+{% block main_container%}
+{% if request.user.is_staff %}
+<table class="table">
+  {% for instance in queryset %}
+  <tr>
+    <td>{{ forloop.counter }}</td>
+    <td>{{ instance }} </td>
+    <td>{{ instance.nombre }}</td>
+    <td>hace {{ instance.timestamp|timesince }}</td>
+  </tr>
+
+  {% endfor %}
+</table>
+{% else %}
+<main class="">
+  <div class="bg-dark text-white p-5 rounded">
+
+    <div class="row">
+      <div class="col-sm-6">
+        <h1>Probar Django</h1>
+        <p class="lead">Esta es una pagina de prueba para principiante en Django</p>
+        <a class="btn btn-lg btn-primary" href="/docs/5.0/components/navbar/" role="button">Unete &raquo;</a>
+      </div>
+      <div class="col-sm-6">
+
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/XGBE_LljPTI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</main>
+{% endif %}
+{% endblock %}
+
+{{ titulo }}
+<hr />
+<br />
+{%   block content %}
+{% if not request.user.is_staff %}
+<div class="row">
+  <div class="col-sm-3">
+    <p class="lead text-align-center">Creando con Django &amp; Bootstrap <br /><br /><i class="fa fa-bullhorn fa-5x" aria-hidden="true"></i></p>
+  </div>
+  <div class="col-sm-3">
+    <p class="lead text-align-center">Y con mucho amor claro</p><img src="{% static 'img/Python-y-django.jpg' %}" class="img-fluid"/>
+  </div>
+  <div class="col-sm-3">
+    <p class="lead text-align-center">Codigo abierto, siempre<br /><br /><i class="fa fa-spinner fa-spin fa-5x fa-fw" aria-hidden="true"></i></p>
+  </div>
+  <div class="col-sm-3 col-sx-12 float-right">
+        {% if not user.is_authenticated %}
+    <p class="lead text-align-center">{{ titulo }} Suscribete</p>
+    <form method="POST" action="">{%  csrf_token %}
+      {{ el_form|crispy }}
+      <input type="submit" class="btn btn-lg btn-primary" value="Enviar" />
+    </form>
+    {% else %}
+    <p class="lead text-align-center">{{ titulo }} <br/><br/><i class="fa fa-hand-peace-o fa-5x" aria-hidden="true"></i></p>
+
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+{% endblock %}
